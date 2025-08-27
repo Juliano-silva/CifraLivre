@@ -1,0 +1,11 @@
+Prompt Para Gerar os templates em IA
+
+Faça um Template em HTML pode usar qualquer framework como
+Bootstrap ou outros, Usando essas imagem como Base Só faça o html
+O Projeto vai ter as seguintes Telas:
+Adicionar as Urls
+Home ("Onde vai aparecer as Músicas")
+Configurações
+
+O nome do Projeto é CifraLivre
+Não Precisa fazer o javascript apenas o html 
