@@ -19,4 +19,4 @@ def settings():
     return render_template("settings.html")
 
 if __name__ == "__main__":
-    app.run(port=5636,debug=True)
+    app.run(port=5173,debug=True)
