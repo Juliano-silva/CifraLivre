@@ -2,12 +2,7 @@ import React, { useState } from 'react';
 
 const AddUrls = () => {
   const [formData, setFormData] = useState({
-    musicUrl: '',
-    songTitle: '',
-    artistName: '',
-    albumName: '',
-    genre: '',
-    tags: ''
+    musicUrl: ''
   });
 
   const handleInputChange = (e) => {
@@ -18,20 +13,20 @@ const AddUrls = () => {
     }));
   };
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log('Form submitted:', formData);
-    // Aqui você adicionaria a lógica para enviar os dados
+    const resposta = await fetch("http://localhost:5000/api/Download", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ url: formData.musicUrl }),
+    });
+    const data = await resposta.json();
+    alert(data.message); // Agora vai funcionar
   };
 
   const handleCancel = () => {
     setFormData({
-      musicUrl: '',
-      songTitle: '',
-      artistName: '',
-      albumName: '',
-      genre: '',
-      tags: ''
+      musicUrl: ''
     });
   };
 
@@ -65,9 +60,9 @@ const AddUrls = () => {
                     <span className="input-group-text bg-dark border-secondary text-light">
                       <i className="fas fa-link"></i>
                     </span>
-                    <input 
-                      type="url" 
-                      className="form-control bg-dark border-secondary text-light" 
+                    <input
+                      type="url"
+                      className="form-control bg-dark border-secondary text-light"
                       id="musicUrl"
                       name="musicUrl"
                       value={formData.musicUrl}
@@ -83,9 +78,9 @@ const AddUrls = () => {
                 <div className="row">
                   <div className="col-md-6 mb-3">
                     <label htmlFor="songTitle" className="form-label">Título da Música</label>
-                    <input 
-                      type="text" 
-                      className="form-control bg-dark border-secondary text-light" 
+                    <input
+                      type="text"
+                      className="form-control bg-dark border-secondary text-light"
                       id="songTitle"
                       name="songTitle"
                       value={formData.songTitle}
@@ -95,9 +90,9 @@ const AddUrls = () => {
                   </div>
                   <div className="col-md-6 mb-3">
                     <label htmlFor="artistName" className="form-label">Artista</label>
-                    <input 
-                      type="text" 
-                      className="form-control bg-dark border-secondary text-light" 
+                    <input
+                      type="text"
+                      className="form-control bg-dark border-secondary text-light"
                       id="artistName"
                       name="artistName"
                       value={formData.artistName}
@@ -110,9 +105,9 @@ const AddUrls = () => {
                 <div className="row">
                   <div className="col-md-6 mb-3">
                     <label htmlFor="albumName" className="form-label">Álbum (Opcional)</label>
-                    <input 
-                      type="text" 
-                      className="form-control bg-dark border-secondary text-light" 
+                    <input
+                      type="text"
+                      className="form-control bg-dark border-secondary text-light"
                       id="albumName"
                       name="albumName"
                       value={formData.albumName}
@@ -122,8 +117,8 @@ const AddUrls = () => {
                   </div>
                   <div className="col-md-6 mb-3">
                     <label htmlFor="genre" className="form-label">Gênero</label>
-                    <select 
-                      className="form-select bg-dark border-secondary text-light" 
+                    <select
+                      className="form-select bg-dark border-secondary text-light"
                       id="genre"
                       name="genre"
                       value={formData.genre}
@@ -146,9 +141,9 @@ const AddUrls = () => {
 
                 <div className="mb-3">
                   <label htmlFor="tags" className="form-label">Tags (Opcional)</label>
-                  <input 
-                    type="text" 
-                    className="form-control bg-dark border-secondary text-light" 
+                  <input
+                    type="text"
+                    className="form-control bg-dark border-secondary text-light"
                     id="tags"
                     name="tags"
                     value={formData.tags}
@@ -185,9 +180,9 @@ const AddUrls = () => {
               </p>
               <div className="mb-3">
                 <label htmlFor="fileUpload" className="form-label">Arquivo de URLs</label>
-                <input 
-                  type="file" 
-                  className="form-control bg-dark border-secondary text-light" 
+                <input
+                  type="file"
+                  className="form-control bg-dark border-secondary text-light"
                   id="fileUpload"
                   accept=".txt,.csv"
                 />
@@ -212,7 +207,7 @@ const AddUrls = () => {
               <div className="row">
                 <div className="col-md-6 mb-3">
                   <div className="d-flex align-items-center">
-                    <div className="music-thumbnail-small bg-gradient-primary me-3 d-flex align-items-center justify-content-center" style={{width: '50px', height: '50px'}}>
+                    <div className="music-thumbnail-small bg-gradient-primary me-3 d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
                       <i className="fas fa-music text-white"></i>
                     </div>
                     <div className="flex-grow-1">
@@ -224,7 +219,7 @@ const AddUrls = () => {
                 </div>
                 <div className="col-md-6 mb-3">
                   <div className="d-flex align-items-center">
-                    <div className="music-thumbnail-small bg-gradient-success me-3 d-flex align-items-center justify-content-center" style={{width: '50px', height: '50px'}}>
+                    <div className="music-thumbnail-small bg-gradient-success me-3 d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
                       <i className="fas fa-guitar text-white"></i>
                     </div>
                     <div className="flex-grow-1">
@@ -236,7 +231,7 @@ const AddUrls = () => {
                 </div>
                 <div className="col-md-6 mb-3">
                   <div className="d-flex align-items-center">
-                    <div className="music-thumbnail-small bg-gradient-warning me-3 d-flex align-items-center justify-content-center" style={{width: '50px', height: '50px'}}>
+                    <div className="music-thumbnail-small bg-gradient-warning me-3 d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
                       <i className="fas fa-headphones text-white"></i>
                     </div>
                     <div className="flex-grow-1">
@@ -248,7 +243,7 @@ const AddUrls = () => {
                 </div>
                 <div className="col-md-6 mb-3">
                   <div className="d-flex align-items-center">
-                    <div className="music-thumbnail-small bg-gradient-danger me-3 d-flex align-items-center justify-content-center" style={{width: '50px', height: '50px'}}>
+                    <div className="music-thumbnail-small bg-gradient-danger me-3 d-flex align-items-center justify-content-center" style={{ width: '50px', height: '50px' }}>
                       <i className="fas fa-microphone text-white"></i>
                     </div>
                     <div className="flex-grow-1">
@@ -264,11 +259,11 @@ const AddUrls = () => {
 
           {/* Quick Add Modal Trigger */}
           <div className="position-fixed bottom-0 end-0 p-4">
-            <button 
+            <button
               className="btn btn-primary btn-lg rounded-circle shadow-lg"
-              data-bs-toggle="modal" 
+              data-bs-toggle="modal"
               data-bs-target="#quickAddModal"
-              style={{width: '60px', height: '60px'}}
+              style={{ width: '60px', height: '60px' }}
             >
               <i className="fas fa-plus"></i>
             </button>
@@ -289,14 +284,14 @@ const AddUrls = () => {
             <div className="modal-body">
               <div className="mb-3">
                 <label htmlFor="quickUrl" className="form-label">URL da Música</label>
-                <input 
-                  type="url" 
-                  className="form-control bg-secondary border-secondary text-light" 
+                <input
+                  type="url"
+                  className="form-control bg-secondary border-secondary text-light"
                   id="quickUrl"
                   placeholder="Cole a URL aqui..."
                 />
               </div>
-              <div className="alert alert-info border-0" style={{backgroundColor: 'rgba(13, 110, 253, 0.1)'}}>
+              <div className="alert alert-info border-0" style={{ backgroundColor: 'rgba(13, 110, 253, 0.1)' }}>
                 <i className="fas fa-info-circle me-2"></i>
                 As informações da música serão preenchidas automaticamente
               </div>
