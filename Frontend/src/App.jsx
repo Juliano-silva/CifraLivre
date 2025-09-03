@@ -1,20 +1,24 @@
-import { useEffect, useState } from "react";
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import Layout from './components/Layout.jsx';
+import Home from './components/Home.jsx';
+import AddUrls from './components/AddUrls.jsx';
+import Settings from './components/Settings.jsx';
+import './style.css';
 
-function App() {
-  const [mensagem, setMensagem] = useState("");
-
-  useEffect(() => {
-    fetch("/api/hello")
-      .then(res => res.json())
-      .then(data => setMensagem(data.message));
-  }, []);
-
+const App = () => {
   return (
-    <div>
-      <h1>React + Flask</h1>
-      <p>{mensagem}</p>
-    </div>
+    <Router>
+      <Layout>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/add-urls" element={<AddUrls />} />
+          <Route path="/settings" element={<Settings />} />
+        </Routes>
+      </Layout>
+    </Router>
   );
-}
+};
 
 export default App;
+
