@@ -1,4 +1,5 @@
 import React from 'react';
+import MusiCreate from '../my_creater/MusiCreate.jsx';
 
 const Home = () => {
   return (
@@ -51,131 +52,9 @@ const Home = () => {
               <div className="col-12 mb-3">
                 <h4><i className="fas fa-fire me-2 text-danger"></i>Músicas em Destaque</h4>
               </div>
-              
-              {/* Music Card 1 */}
-              <div className="col-xl-3 col-lg-4 col-md-6 mb-4">
-                <div className="card bg-secondary border-0 music-card">
-                  <div className="card-img-top position-relative">
-                    <div className="music-thumbnail bg-gradient-danger d-flex align-items-center justify-content-center" style={{height: '200px'}}>
-                      <i className="fas fa-music fa-3x text-white opacity-50"></i>
-                    </div>
-                    <div className="play-overlay position-absolute top-50 start-50 translate-middle">
-                      <button className="btn btn-primary btn-lg rounded-circle">
-                        <i className="fas fa-play"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div className="card-body">
-                    <h6 className="card-title mb-1">Dancing Between The Shadows</h6>
-                    <p className="card-text text-muted small">Of Rhythm</p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <small className="text-muted">4:32</small>
-                      <div>
-                        <button className="btn btn-sm btn-outline-light me-1">
-                          <i className="fas fa-heart"></i>
-                        </button>
-                        <button className="btn btn-sm btn-outline-light">
-                          <i className="fas fa-share"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+              {/* Colocar As divs das Imagens */}
+              <MusiCreate/>
               </div>
-
-              {/* Music Card 2 */}
-              <div className="col-xl-3 col-lg-4 col-md-6 mb-4">
-                <div className="card bg-secondary border-0 music-card">
-                  <div className="card-img-top position-relative">
-                    <div className="music-thumbnail bg-gradient-warning d-flex align-items-center justify-content-center" style={{height: '200px'}}>
-                      <i className="fas fa-guitar fa-3x text-white opacity-50"></i>
-                    </div>
-                    <div className="play-overlay position-absolute top-50 start-50 translate-middle">
-                      <button className="btn btn-primary btn-lg rounded-circle">
-                        <i className="fas fa-play"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div className="card-body">
-                    <h6 className="card-title mb-1">A.L.O.N.E</h6>
-                    <p className="card-text text-muted small">Subscribe</p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <small className="text-muted">3:45</small>
-                      <div>
-                        <button className="btn btn-sm btn-outline-light me-1">
-                          <i className="fas fa-heart"></i>
-                        </button>
-                        <button className="btn btn-sm btn-outline-light">
-                          <i className="fas fa-share"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Music Card 3 */}
-              <div className="col-xl-3 col-lg-4 col-md-6 mb-4">
-                <div className="card bg-secondary border-0 music-card">
-                  <div className="card-img-top position-relative">
-                    <div className="music-thumbnail bg-gradient-info d-flex align-items-center justify-content-center" style={{height: '200px'}}>
-                      <i className="fas fa-headphones fa-3x text-white opacity-50"></i>
-                    </div>
-                    <div className="play-overlay position-absolute top-50 start-50 translate-middle">
-                      <button className="btn btn-primary btn-lg rounded-circle">
-                        <i className="fas fa-play"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div className="card-body">
-                    <h6 className="card-title mb-1">Alone in the Abyss</h6>
-                    <p className="card-text text-muted small">Yoasobi</p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <small className="text-muted">4:18</small>
-                      <div>
-                        <button className="btn btn-sm btn-outline-light me-1">
-                          <i className="fas fa-heart"></i>
-                        </button>
-                        <button className="btn btn-sm btn-outline-light">
-                          <i className="fas fa-share"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              {/* Music Card 4 */}
-              <div className="col-xl-3 col-lg-4 col-md-6 mb-4">
-                <div className="card bg-secondary border-0 music-card">
-                  <div className="card-img-top position-relative">
-                    <div className="music-thumbnail bg-gradient-success d-flex align-items-center justify-content-center" style={{height: '200px'}}>
-                      <i className="fas fa-microphone fa-3x text-white opacity-50"></i>
-                    </div>
-                    <div className="play-overlay position-absolute top-50 start-50 translate-middle">
-                      <button className="btn btn-primary btn-lg rounded-circle">
-                        <i className="fas fa-play"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div className="card-body">
-                    <h6 className="card-title mb-1">We Are Chaos</h6>
-                    <p className="card-text text-muted small">Song Artist</p>
-                    <div className="d-flex justify-content-between align-items-center">
-                      <small className="text-muted">5:12</small>
-                      <div>
-                        <button className="btn btn-sm btn-outline-light me-1">
-                          <i className="fas fa-heart"></i>
-                        </button>
-                        <button className="btn btn-sm btn-outline-light">
-                          <i className="fas fa-share"></i>
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
 
             {/* Recent Songs Section */}
             <div className="row mt-4">

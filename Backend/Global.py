@@ -1,13 +1,19 @@
-import os
+import os,subprocess,sys,io
+
 
 class GlobalImportes():
-    def __init__(self):
-        print(self)
     Path = r"C:\Users\sustu\CifraLivre"
-    Create_download_Folder = os.path.join(Path,"download")
-    Create_DB_File = "Banco.db"
     Path_comando = r"C:\Users\sustu\OneDrive\Pictures\Programação\Projetos Principais\CifraLivre\Frontend"
+    Path_comando_Database = r"C:\Users\sustu\OneDrive\Pictures\Programação\Projetos Principais\CifraLivre\Database"
+    Create_download_Folder = os.path.join(Path,"download")
+    Create_DB_File = os.path.join(Path,"Banco.db")
+    Create_DB_File_TESTE = os.path.join(Path_comando_Database,"api.db")
 
-    def Rodar():
-        print("Rodar o Mundo")
 
+    # Criar um function que Usa o subprocess
+    def NoneFunc():
+        subprocess.run(fr'start cmd cd {GlobalImportes.Create_download_Folder} & explorer . & exit',shell=True)
+
+    
+    def FormatoUTF():
+        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8") # Assim, qualquer print() vai usar UTF-8.
