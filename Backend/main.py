@@ -2,7 +2,8 @@ from flask import Flask, jsonify,render_template,request
 from flask_cors import CORS
 import os,subprocess
 from Global import GlobalImportes
-from Backend.youtubeDownloader import DownloadMusic
+from youtubeDownloader import DownloadMusic
+from dbService import DROP_ALL,Create_All
 
 
 app = Flask(__name__)
