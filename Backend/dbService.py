@@ -2,7 +2,7 @@ import sqlite3
 from Global import GlobalImportes
 
 
-with sqlite3.connect(GlobalImportes.Create_DB_File_TESTE) as connection:
+with sqlite3.connect(GlobalImportes.Create_DB_File_TESTE,check_same_thread=False) as connection:
     cursor = connection.cursor()
 
     def Create_All():
@@ -67,6 +67,10 @@ with sqlite3.connect(GlobalImportes.Create_DB_File_TESTE) as connection:
                        """,(newValue[key],Id)
                        )
         connection.commit()
+        
+    def SelectItem(database):
+        res = cursor.execute(f"SELECT * FROM {database}")
+        return (res.fetchall())
     
     def DROP_ALL():
         cursor.executescript("""
@@ -77,8 +81,7 @@ with sqlite3.connect(GlobalImportes.Create_DB_File_TESTE) as connection:
             DROP TABLE Generos;
         """)
 
-
-
+# print(SelectItem("Musicas"))
 # RemoverItem("Albuns","id_album",2)
 # InsertItem("Albuns",(None,"Titulo 3","01-07-2024","https:"))
 # UpdateItem("Albuns",{

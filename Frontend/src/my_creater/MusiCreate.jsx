@@ -1,20 +1,28 @@
-import React,{useState} from "react"
+import React, { useState, useEffect } from "react"
 import CardMusic from "./helpers";
 
 export default function MusiCreate() {
-    const [music,SetMusic] = useState({
-        "Thumb":"https://i.pinimg.com/736x/69/e9/1c/69e91c687144aec896a9e0e6241afd9d.jpg",
-        "Creater":"Cor dos olhos",
-        "MusicName":"Carne Viva",
-        "Tempo":"5:00"
-    })
 
-    console.log(music);
-    return(
+    const [music, SetMusic] = useState([])
+
+
+    useEffect(() => {
+        fetch("http://localhost:5000/api/Select") // sua rota no backend
+            .then((res) => {
+                if (!res.ok) {
+                    throw new Error("Erro ao buscar dados");
+                }
+                return res.json();
+            }).then((data) => {
+                SetMusic(data); // salva a lista toda
+            })
+    }, [])
+
+    return (
         <div>
-            {
-                CardMusic(music["Thumb"],music["MusicName"],music["Creater"],music["Tempo"])
-            }
+            {music.map((music, index) =>
+                CardMusic(music[4], music[1], music[0], music[6], index)
+            )}
         </div>
     )
 }

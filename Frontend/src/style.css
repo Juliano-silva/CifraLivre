@@ -1,5 +1,12 @@
 /* CifraLivre Custom Styles */
 
+*{
+    padding: 0;
+    margin: 0;
+    color: white;
+}
+
+
 /* Global Styles */
 body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
@@ -349,3 +356,28 @@ body {
     box-shadow: 0 0 20px rgba(13, 110, 253, 0.3);
 }
 
+/* My Custom */
+#music_Card_List > div{
+    display: flex;
+    overflow: auto;
+    max-height: 60vh;
+    height: 80vh;
+}
+
+#music_Card_List > div > div{
+    margin-left: 2vh;
+    margin-top: 2vh;
+}
+
+
+#Card_Music{
+    width: 50vh;
+    font-size: 2vh;
+    max-height: 45vh;
+}
+
+#Card_Music_Thumb{
+    background-repeat: no-repeat;
+    background-position: center;
+    background-size: cover;
+}

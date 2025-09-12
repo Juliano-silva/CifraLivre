@@ -53,7 +53,9 @@ const Home = () => {
                 <h4><i className="fas fa-fire me-2 text-danger"></i>Músicas em Destaque</h4>
               </div>
               {/* Colocar As divs das Imagens */}
-              <MusiCreate/>
+              <div id="music_Card_List">
+                <MusiCreate/>
+              </div>
               </div>
 
             {/* Recent Songs Section */}

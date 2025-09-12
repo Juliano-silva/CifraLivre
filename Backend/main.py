@@ -3,16 +3,16 @@ from flask_cors import CORS
 import os,subprocess
 from Global import GlobalImportes
 from youtubeDownloader import DownloadMusic
-from dbService import DROP_ALL,Create_All
+from dbService import DROP_ALL,Create_All,SelectItem
 
 
 app = Flask(__name__)
 CORS(app)  # Permite que o React acesse o Flask
 
 # Comandos
-@app.route("/api/hello")
-def hello():
-    return jsonify(message="Olá do Flask!")
+@app.route("/api/Select",methods=["GET"])
+def Select():
+    return jsonify(SelectItem("Musicas"))
 
 @app.route("/api/Download",methods=["GET","POST"])
 def Download():
