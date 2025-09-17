@@ -1,5 +1,6 @@
-import React from 'react';
+import React, { useState } from 'react';
 import MusiCreate from '../my_creater/MusiCreate.jsx';
+import { SidebarItens } from '../my_creater/helpers.jsx';
 
 const Home = () => {
   return (
@@ -7,7 +8,7 @@ const Home = () => {
       {/* Main Content */}
       <div className="container-fluid py-4">
         <div className="row">
-          {/* Sidebar */}
+
           <div className="col-lg-3 col-md-4 mb-4">
             <div className="card bg-secondary border-0 h-100">
               <div className="card-header bg-dark border-0">
@@ -15,15 +16,9 @@ const Home = () => {
               </div>
               <div className="card-body">
                 <div className="list-group list-group-flush">
-                  <a href="#" className="list-group-item list-group-item-action bg-transparent text-light border-secondary">
-                    <i className="fas fa-heart me-2 text-danger"></i>Favoritas
-                  </a>
-                  <a href="#" className="list-group-item list-group-item-action bg-transparent text-light border-secondary">
-                    <i className="fas fa-clock me-2 text-warning"></i>Recentes
-                  </a>
-                  <a href="#" className="list-group-item list-group-item-action bg-transparent text-light border-secondary">
-                    <i className="fas fa-star me-2 text-info"></i>Mais Tocadas
-                  </a>
+                  <SidebarItens Link="#" classNameIcon="fas fa-heart me-2 text-danger" IcoName="Favoritas" />
+                  <SidebarItens Link="#" classNameIcon="fas fa-clock me-2 text-warning" IcoName="Recentes" />
+                  <SidebarItens Link="#" classNameIcon="fas fa-star me-2 text-info" IcoName="Mais Tocadas" />
                 </div>
               </div>
             </div>
@@ -38,124 +33,27 @@ const Home = () => {
                   <span className="input-group-text bg-secondary border-secondary text-light">
                     <i className="fas fa-search"></i>
                   </span>
-                  <input 
-                    type="text" 
-                    className="form-control bg-dark border-secondary text-light" 
+                  <input
+                    type="text"
+                    className="form-control bg-dark border-secondary text-light"
                     placeholder="Buscar músicas, artistas ou álbuns..."
                   />
                 </div>
               </div>
             </div>
 
-            {/* Music Grid */}
+
+            <div className='row'>
+              <div className='col-12 mb-3'>
+                <h4><i className='fas fa-music me-2 text-success'></i>Minhas Músicas</h4>
+              </div>
+              <div id="music_Card_List">
+                <MusiCreate />
+              </div>
+            </div>
             <div className="row">
               <div className="col-12 mb-3">
                 <h4><i className="fas fa-fire me-2 text-danger"></i>Músicas em Destaque</h4>
-              </div>
-              {/* Colocar As divs das Imagens */}
-              <div id="music_Card_List">
-                <MusiCreate/>
-              </div>
-              </div>
-
-            {/* Recent Songs Section */}
-            <div className="row mt-4">
-              <div className="col-12 mb-3">
-                <h4><i className="fas fa-clock me-2 text-warning"></i>Tocadas Recentemente</h4>
-              </div>
-              <div className="col-12">
-                <div className="card bg-secondary border-0">
-                  <div className="card-body">
-                    <div className="row">
-                      <div className="col-md-6 mb-3">
-                        <div className="d-flex align-items-center">
-                          <div className="music-thumbnail-small bg-gradient-primary me-3 d-flex align-items-center justify-content-center" style={{width: '60px', height: '60px'}}>
-                            <i className="fas fa-music text-white"></i>
-                          </div>
-                          <div className="flex-grow-1">
-                            <h6 className="mb-1">Smile</h6>
-                            <small className="text-muted">Artist Name</small>
-                          </div>
-                          <button className="btn btn-sm btn-outline-light">
-                            <i className="fas fa-play"></i>
-                          </button>
-                        </div>
-                      </div>
-                      <div className="col-md-6 mb-3">
-                        <div className="d-flex align-items-center">
-                          <div className="music-thumbnail-small bg-gradient-secondary me-3 d-flex align-items-center justify-content-center" style={{width: '60px', height: '60px'}}>
-                            <i className="fas fa-guitar text-white"></i>
-                          </div>
-                          <div className="flex-grow-1">
-                            <h6 className="mb-1">Heartless</h6>
-                            <small className="text-muted">Artist Name</small>
-                          </div>
-                          <button className="btn btn-sm btn-outline-light">
-                            <i className="fas fa-play"></i>
-                          </button>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-
-      {/* Music Player Bar */}
-      <div className="fixed-bottom bg-dark border-top border-secondary">
-        <div className="container-fluid py-3">
-          <div className="row align-items-center">
-            <div className="col-md-3">
-              <div className="d-flex align-items-center">
-                <div className="music-thumbnail-small bg-gradient-info me-3 d-flex align-items-center justify-content-center" style={{width: '50px', height: '50px'}}>
-                  <i className="fas fa-music text-white"></i>
-                </div>
-                <div>
-                  <h6 className="mb-0 small">Dynamic Warmup</h6>
-                  <small className="text-muted">Artist</small>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6 text-center">
-              <div className="d-flex justify-content-center align-items-center mb-2">
-                <button className="btn btn-sm btn-outline-light me-2">
-                  <i className="fas fa-random"></i>
-                </button>
-                <button className="btn btn-sm btn-outline-light me-2">
-                  <i className="fas fa-step-backward"></i>
-                </button>
-                <button className="btn btn-primary btn-lg me-2">
-                  <i className="fas fa-pause"></i>
-                </button>
-                <button className="btn btn-sm btn-outline-light me-2">
-                  <i className="fas fa-step-forward"></i>
-                </button>
-                <button className="btn btn-sm btn-outline-light">
-                  <i className="fas fa-redo"></i>
-                </button>
-              </div>
-              <div className="progress" style={{height: '4px'}}>
-                <div className="progress-bar bg-primary" style={{width: '35%'}}></div>
-              </div>
-              <div className="d-flex justify-content-between mt-1">
-                <small className="text-muted">1:24</small>
-                <small className="text-muted">4:00</small>
-              </div>
-            </div>
-            <div className="col-md-3 text-end">
-              <div className="d-flex justify-content-end align-items-center">
-                <button className="btn btn-sm btn-outline-light me-2">
-                  <i className="fas fa-heart"></i>
-                </button>
-                <button className="btn btn-sm btn-outline-light me-2">
-                  <i className="fas fa-volume-up"></i>
-                </button>
-                <div className="progress me-2" style={{width: '100px', height: '4px'}}>
-                  <div className="progress-bar bg-light" style={{width: '70%'}}></div>
-                </div>
               </div>
             </div>
           </div>

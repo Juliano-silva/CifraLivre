@@ -1,28 +1,47 @@
 import React, { useState, useEffect } from "react"
-import CardMusic from "./helpers";
+import { CardMusic, MusicPlayerOn } from "./helpers";
 
 export default function MusiCreate() {
-
     const [music, SetMusic] = useState([])
-
+    const [selectedMusic, setSelectedMusic] = useState(null)
+    const [showPlayer, setShowPlayer] = useState(false)
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/Select") // sua rota no backend
+        fetch("http://localhost:5000/api/Select")
             .then((res) => {
                 if (!res.ok) {
                     throw new Error("Erro ao buscar dados");
                 }
                 return res.json();
             }).then((data) => {
-                SetMusic(data); // salva a lista toda
+                SetMusic(data);
             })
     }, [])
 
+    const SelectMusic = (item) => {
+        setSelectedMusic(item)
+        setShowPlayer(true)
+    }
+
     return (
-        <div>
+        <div onClick={() => setShowPlayer(!showPlayer)}>
             {music.map((music, index) =>
-                CardMusic(music[4], music[1], music[0], music[6], index)
+                <div key={index} onClick={() => SelectMusic(music)}>
+                    <CardMusic Id={index}
+                        Thumb={music[4]}
+                        musicName={music[1]}
+                        Creater={music[0]}
+                        Time={music[6]} />
+                </div>
             )}
+            <div>{showPlayer && selectedMusic && (
+                <MusicPlayerOn
+                    musicName={selectedMusic[1]}
+                    artist={selectedMusic[0]}
+                    time={selectedMusic[6]}
+                    thumb={selectedMusic[4]}
+                />
+            )}</div>
         </div>
     )
 }
