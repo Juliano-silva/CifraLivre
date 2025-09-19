@@ -3,6 +3,7 @@ import os,subprocess,sys,io
 
 class GlobalImportes():
     Path = r"C:\Users\sustu\CifraLivre"
+    Path_Download = r"C:\Users\sustu\CifraLivre\download"
     Path_comando = r"C:\Users\sustu\OneDrive\Pictures\Programação\Projetos Principais\CifraLivre\Frontend"
     Path_comando_Database = r"C:\Users\sustu\OneDrive\Pictures\Programação\Projetos Principais\CifraLivre\Database"
     Create_download_Folder = os.path.join(Path,"download")

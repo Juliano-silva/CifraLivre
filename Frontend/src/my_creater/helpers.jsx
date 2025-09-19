@@ -32,64 +32,74 @@ export function SidebarItens({Link,classNameIcon,IcoName}) {
         </div>
     )
 }
-
 export function MusicPlayerOn({Thumb, musicName, Creater, Time,Id}){
-    return(
-      <div className="fixed-bottom bg-dark border-top border-secondary">
-        <div className="container-fluid py-3">
-          <div className="row align-items-center">
-            <div className="col-md-3">
-              <div className="d-flex align-items-center">
-                <div className="music-thumbnail-small bg-gradient-info me-3 d-flex align-items-center justify-content-center" style={{width: '50px', height: '50px'}}>
-                  <i className="fas fa-music text-white"></i>
-                </div>
-                <div>
-                  <h6 className="mb-0 small">{musicName}</h6>
-                  <small className="text-muted">{Creater}</small>
-                </div>
-              </div>
-            </div>
-            <div className="col-md-6 text-center">
-              <div className="d-flex justify-content-center align-items-center mb-2">
-                <button className="btn btn-sm btn-outline-light me-2">
-                  <i className="fas fa-random"></i>
-                </button>
-                <button className="btn btn-sm btn-outline-light me-2">
-                  <i className="fas fa-step-backward"></i>
-                </button>
-                <button className="btn btn-primary btn-lg me-2">
-                  <i className="fas fa-pause"></i>
-                </button>
-                <button className="btn btn-sm btn-outline-light me-2">
-                  <i className="fas fa-step-forward"></i>
-                </button>
-                <button className="btn btn-sm btn-outline-light">
-                  <i className="fas fa-redo"></i>
-                </button>
-              </div>
-              <div className="progress" style={{height: '4px'}}>
-                <div className="progress-bar bg-primary" style={{width: '35%'}}></div>
-              </div>
-              <div className="d-flex justify-content-between mt-1">
-                <small className="text-muted">{Time - 20}</small>
-                <small className="text-muted">{Time}</small>
-              </div>
-            </div>
-            <div className="col-md-3 text-end">
-              <div className="d-flex justify-content-end align-items-center">
-                <button className="btn btn-sm btn-outline-light me-2">
-                  <i className="fas fa-heart"></i>
-                </button>
-                <button className="btn btn-sm btn-outline-light me-2">
-                  <i className="fas fa-volume-up"></i>
-                </button>
-                <div className="progress me-2" style={{width: '100px', height: '4px'}}>
-                  <div className="progress-bar bg-light" style={{width: '70%'}}></div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    )
+  return(
+    <div id="MusicPlayerOn">
+      <img src={Thumb} alt="" />
+      <h1>{musicName}</h1>
+
+      <audio src={`http://localhost:5000/musicPlay/${musicName}.mp3`} controls autoPlay></audio>
+    </div>
+  )
 }
+
+// export function MusicPlayerOn({Thumb, musicName, Creater, Time,Id}){
+//     return(
+//       <div className="fixed-bottom bg-dark border-top border-secondary">
+//         <div className="container-fluid py-3">
+//           <div className="row align-items-center">
+//             <div className="col-md-3">
+//               <div className="d-flex align-items-center">
+//                 <div className="music-thumbnail-small bg-gradient-info me-3 d-flex align-items-center justify-content-center" style={{width: '50px', height: '50px'}}>
+//                   <i className="fas fa-music text-white"></i>
+//                 </div>
+//                 <div>
+//                   <h6 className="mb-0 small">{musicName}</h6>
+//                   <small className="text-muted">{Creater}</small>
+//                 </div>
+//               </div>
+//             </div>
+//             <div className="col-md-6 text-center">
+//               <div className="d-flex justify-content-center align-items-center mb-2">
+//                 <button className="btn btn-sm btn-outline-light me-2">
+//                   <i className="fas fa-random"></i>
+//                 </button>
+//                 <button className="btn btn-sm btn-outline-light me-2">
+//                   <i className="fas fa-step-backward"></i>
+//                 </button>
+//                 <button className="btn btn-primary btn-lg me-2">
+//                   <i className="fas fa-pause"></i>
+//                 </button>
+//                 <button className="btn btn-sm btn-outline-light me-2">
+//                   <i className="fas fa-step-forward"></i>
+//                 </button>
+//                 <button className="btn btn-sm btn-outline-light">
+//                   <i className="fas fa-redo"></i>
+//                 </button>
+//               </div>
+//               <div className="progress" style={{height: '4px'}}>
+//                 <div className="progress-bar bg-primary" style={{width: '35%'}}></div>
+//               </div>
+//               <div className="d-flex justify-content-between mt-1">
+//                 <small className="text-muted">{Time - 20}</small>
+//                 <small className="text-muted">{Time}</small>
+//               </div>
+//             </div>
+//             <div className="col-md-3 text-end">
+//               <div className="d-flex justify-content-end align-items-center">
+//                 <button className="btn btn-sm btn-outline-light me-2">
+//                   <i className="fas fa-heart"></i>
+//                 </button>
+//                 <button className="btn btn-sm btn-outline-light me-2">
+//                   <i className="fas fa-volume-up"></i>
+//                 </button>
+//                 <div className="progress me-2" style={{width: '100px', height: '4px'}}>
+//                   <div className="progress-bar bg-light" style={{width: '70%'}}></div>
+//                 </div>
+//               </div>
+//             </div>
+//           </div>
+//         </div>
+//       </div>
+//     )
+// }

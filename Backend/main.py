@@ -1,4 +1,4 @@
-from flask import Flask, jsonify,render_template,request
+from flask import Flask, jsonify,render_template,request,send_from_directory
 from flask_cors import CORS
 import os,subprocess
 from Global import GlobalImportes
@@ -13,6 +13,10 @@ CORS(app)  # Permite que o React acesse o Flask
 @app.route("/api/Select",methods=["GET"])
 def Select():
     return jsonify(SelectItem("Musicas"))
+
+@app.route("/musicPlay/<path:filename>")
+def musicFolder(filename):
+    return send_from_directory(os.path.join(GlobalImportes.Path_Download),filename)
 
 @app.route("/api/Download",methods=["GET","POST"])
 def Download():

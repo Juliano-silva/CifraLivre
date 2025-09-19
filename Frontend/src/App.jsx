@@ -4,6 +4,7 @@ import Layout from './components/Layout.jsx';
 import Home from './components/Home.jsx';
 import AddUrls from './components/AddUrls.jsx';
 import Settings from './components/Settings.jsx';
+import FilterLink from './my_creater/FilterLink.jsx';
 import './style.css';
 
 const App = () => {
@@ -14,6 +15,7 @@ const App = () => {
           <Route path="/" element={<Home />} />
           <Route path="/add-urls" element={<AddUrls />} />
           <Route path="/settings" element={<Settings />} />
+          <Route path="/filterlink" element={<FilterLink />} />
         </Routes>
       </Layout>
     </Router>

@@ -12,7 +12,7 @@
 
 <ol>
 <li><del>Download de músicas (via URL) </del></li>
-<li>Player integrado (play, pause, stop, próximo, anterior).</li>
+<li><del>Player integrado (play, pause, stop, próximo, anterior)</del></li>
 <li>Suporte a playlists (criar, editar, excluir e salvar listas de músicas).</li>
 <li>Controle de volume e barra de progresso.</li>
 <li>Reprodução em segundo plano (se for app desktop ou mobile).</li>

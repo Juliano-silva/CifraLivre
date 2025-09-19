@@ -16,9 +16,10 @@ const Home = () => {
               </div>
               <div className="card-body">
                 <div className="list-group list-group-flush">
-                  <SidebarItens Link="#" classNameIcon="fas fa-heart me-2 text-danger" IcoName="Favoritas" />
-                  <SidebarItens Link="#" classNameIcon="fas fa-clock me-2 text-warning" IcoName="Recentes" />
-                  <SidebarItens Link="#" classNameIcon="fas fa-star me-2 text-info" IcoName="Mais Tocadas" />
+                  <SidebarItens Link="/filterlink#allmusic" classNameIcon="fas fa-music me-2 text-light" IcoName="Todas as Músicas" />
+                  <SidebarItens Link="/filterlink#favorite" classNameIcon="fas fa-heart me-2 text-danger" IcoName="Favoritas" />
+                  <SidebarItens Link="/filterlink#recente" classNameIcon="fas fa-clock me-2 text-warning" IcoName="Recentes" />
+                  <SidebarItens Link="/filterlink#population" classNameIcon="fas fa-star me-2 text-info" IcoName="Mais Tocadas" />
                 </div>
               </div>
             </div>
