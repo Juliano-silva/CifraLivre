@@ -17,7 +17,7 @@ def Select():
 @app.route("/musicPlay/<path:filename>")
 def musicFolder(filename):
     return send_from_directory(os.path.join(GlobalImportes.Path_Download),filename)
-
+ 
 @app.route("/api/Download",methods=["GET","POST"])
 def Download():
     dados = request.get_json()

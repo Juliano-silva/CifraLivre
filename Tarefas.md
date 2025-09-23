@@ -6,6 +6,7 @@
 <li><del>E Criar o CRUD</del></li>
 <li>Documentar Melhor o Código</li>
 <li><del>Adicionar Músicas Novas</del></li>
+<li>Fazer os botões do Player</li>
 </ol>
 
 <h1><center>🎵 Funcionalidades principais</center></h1>

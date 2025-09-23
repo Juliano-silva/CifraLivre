@@ -24,24 +24,22 @@ export default function MusiCreate() {
     }
 
     return (
-        <div onClick={() => setShowPlayer(!showPlayer)}>
-            {music.map((music, index) =>
-                <div key={index} onClick={() => SelectMusic(music)}>
-                    <CardMusic Id={index}
-                        Thumb={music[4]}
-                        musicName={music[1]}
-                        Creater={music[0]}
-                        Time={music[6]} />
-                </div>
-            )}
+        <div>
+            <div onClick={() => setShowPlayer(!showPlayer)}>
+                {music.map((music, index) =>
+                    <div key={index} onClick={() => SelectMusic(music)}>
+                        <CardMusic Id={index}
+                            Thumb={music[4]}
+                            musicName={music[1]}
+                            Creater={music[0]}
+                            Time={music[6]} />
+                    </div>
+                )}
+            </div>
             <div>{showPlayer && selectedMusic && (
-                <MusicPlayerOn
-                    musicName={selectedMusic[1]}
-                    artist={selectedMusic[0]}
-                    time={selectedMusic[6]}
-                    thumb={selectedMusic[4]}
-                />
-            )}</div>
+                <MusicPlayerOn Id={parseInt(selectedMusic[0]) - 1}/>
+            )}
+            </div>
         </div>
     )
 }
