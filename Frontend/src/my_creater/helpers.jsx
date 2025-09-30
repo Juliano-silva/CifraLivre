@@ -37,42 +37,66 @@ export function SidebarItens({ Link, classNameIcon, IcoName }) {
 }
 
 export function MusicPlayerOn(props) {
-  const [musiChoice,SetmusiChoice] = useState({})
-  const [Idmusic,SetIdmusic] = useState(props.Id)
+  const [musiChoice, SetmusiChoice] = useState({})
+  const [Idmusic, SetIdmusic] = useState(props.Id)
+  const [currentTime, setCurrentTime] = useState(0); // 2:22 em segundos
+  const [duration, setDuration] = useState(240); // 4:00 em segundos
+  const [isPlaying, SetisPlaying] = useState(false)
+  const [isRandom, SetisRandom] = useState(false)
+  const [isLength, SetisLength] = useState(0)
+  const [isRepeat, SetisRepeat] = useState(false)
+  const Audio = document.getElementById("Audio")
 
   useEffect(() => {
-  const FunChoice = (Id) => {
-    fetch("http://localhost:5000/api/Select").then((response) => response.json().then((dados) => {
-      SetmusiChoice({
-        "Id":dados[Id][0],
-        "Nome":dados[Id][1],
-        "Thumb":dados[Id][4],
-        "Data":dados[Id][3]
-      })
-    }))
-  }
+    const FunChoice = (Id) => {
+      fetch("http://localhost:5000/api/Select").then((response) => response.json().then((dados) => {
+        SetisLength(dados.length)
+        SetmusiChoice({
+          "Id": dados[Id][0],
+          "Nome": dados[Id][1],
+          "Thumb": dados[Id][4],
+          "Data": dados[Id][3],
+          "MusicFile": String(dados[Id][1]).replace(/[\\\/\:\*\?\"\<\>\|]/gi, '') // Retira caracteres inválidos do nome do arquivo
+        })
+      }))
+    }
     FunChoice(Idmusic)
+  }, [Idmusic])
 
-  },[Idmusic])
+  // Fazer a Barra de Progresso Funcionar
 
-  const formatTime = (seconds) => {};
-  const togglePlay = () => {};
-  const toggleRandom = () => {};
-  const toggleRepeat = () => {};
+
+  const formatTime = (seconds) => {
+    const mins = Math.floor(seconds / 60);
+    const secs = Math.floor(seconds % 60);
+    return `${mins}:${secs.toString().padStart(2, '0')}`;
+  };
+
+  const togglePlay = () => {
+    SetisPlaying(!isPlaying)
+
+    if (isPlaying) {
+      document.getElementById("Audio").play()
+    } else {
+      document.getElementById("Audio").pause()
+    }
+  };
+  const toggleRandom = () => {
+    SetisRandom(!isRandom)
+    SetIdmusic(Math.floor(Math.random() * isLength))
+  };
+
+  const toggleRepeat = () => { };
 
   // Antes 
-  const handlePrevious = () => {
-    SetIdmusic(prevId => prevId - 1)
-    FunChoice(Idmusic)    
-  };
+  const handlePrevious = () => { SetIdmusic(prevId => prevId -= 1) };
 
   // Depois
-  const handleNext = () => {
-    SetIdmusic(prevId => prevId + 1)
-    FunChoice(Idmusic)
-  };
-  const handleProgressChange = (e) => {};
-  const handleVolumeChange = (e) => {};
+  const handleNext = () => { SetIdmusic(prevId => prevId += 1) };
+
+
+
+  const handleVolumeChange = (e) => { };
 
   return (
     <div id="Body_Player" className="bg-dark text-light min-vh-100 d-flex align-items-center justify-content-center">
@@ -104,18 +128,17 @@ export function MusicPlayerOn(props) {
                 </div>
 
                 {/* Barra de Progresso */}
-                <div className="mb-4">
-                  <div className="progress mb-2" style={{ height: '6px' }}>
-                    <div
-                      className="progress-bar bg-primary"
-                    // style={{ width: `${(currentTime / duration) * 100}%` }}
-                    ></div>
-                  </div>
-                  <div className="d-flex justify-content-between">
-                    {/* <small className="text-muted">{formatTime(currentTime)}</small> */}
-                    {/* <small className="text-muted">{formatTime(duration)}</small> */}
-                  </div>
-                  <audio src={`http://localhost:5000/musicPlay/${musiChoice["Nome"]}.mp3`} autoPlay></audio>
+                <div className="mb-8">
+                 <input
+                        type="range"
+                        className="form-range flex-grow-1"
+                        min="0"
+                        max={duration}
+                        value={currentTime}
+                        // onLoadedMetadata={(e) => setDuration(e.target.duration)}
+                        // onTimeUpdate={(e) => setCurrentTime(e.target.currentTime)}
+                      />
+                  <audio id="Audio" src={`http://localhost:5000/musicPlay/${musiChoice["MusicFile"]}.mp3`} autoPlay></audio>
                 </div>
 
                 {/* Controles Principais */}
@@ -123,7 +146,7 @@ export function MusicPlayerOn(props) {
 
                   {/* Botão Random */}
                   <button
-                    // className={`btn btn-lg me-3 ${isRandom ? 'btn-primary' : 'btn-outline-light'}`}
+                    className={`btn btn-lg me-3 ${isRandom ? 'btn-primary' : 'btn-outline-light'}`}
                     onClick={toggleRandom}
                     title="Aleatório"
                   >
@@ -141,12 +164,12 @@ export function MusicPlayerOn(props) {
 
                   {/* Botão Play/Pause */}
                   <button
-                    // className={`btn btn-primary btn-lg rounded-circle me-3 ${isPlaying ? 'playing' : ''}`}
+                    className={`btn btn-primary btn-lg rounded-circle me-3 ${isPlaying ? 'playing' : ''}`}
                     onClick={togglePlay}
                     style={{ width: '80px', height: '80px' }}
-                  // title={isPlaying ? 'Pausar' : 'Reproduzir'}
+                    title={isPlaying ? 'Pausar' : 'Reproduzir'}
                   >
-                    {/* <i className={`fas ${isPlaying ? 'fa-pause' : 'fa-play'} fa-2x`}></i> */}
+                    <i className={`fas ${isPlaying ? 'fa-play' : 'fa-pause'} fa-2x`}></i>
                   </button>
 
                   {/* Botão Próxima */}
@@ -160,7 +183,7 @@ export function MusicPlayerOn(props) {
 
                   {/* Botão Repetir */}
                   <button
-                    // className={`btn btn-lg ${isRepeat ? 'btn-primary' : 'btn-outline-light'}`}
+                    className={`btn btn-lg ${isRepeat ? 'btn-primary' : 'btn-outline-light'}`}
                     onClick={toggleRepeat}
                     title="Repetir"
                   >
@@ -188,7 +211,6 @@ export function MusicPlayerOn(props) {
                         className="form-range flex-grow-1"
                         min="0"
                         max="100"
-                        // value={volume}
                         onChange={handleVolumeChange}
                       />
                       <i className="fas fa-volume-up text-muted ms-2"></i>

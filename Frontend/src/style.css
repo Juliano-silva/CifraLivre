@@ -365,15 +365,18 @@ body {
 
 
 /* Home */
-#music_Card_List > div {
+
+#music_Card_List {
+  overflow: hidden;
+}
+
+#Musicard{
   display: flex;
   overflow: auto;
-  max-height: 60vh;
-  height: 80vh;
   cursor: pointer;
 }
 
-#music_Card_List > div > div {
+#Musicard > div {
   margin-left: 2vh;
   margin-top: 2vh;
 }
