@@ -28,7 +28,6 @@ def Download():
 
 subprocess.Popen(
     "npm run dev",
-    cwd=GlobalImportes.Path_comando,
     shell=True,
     stdout=subprocess.DEVNULL, # Vai Ignorar a Saída
     stderr=subprocess.DEVNULL, # Vai Ignorar os erros
@@ -36,5 +35,5 @@ subprocess.Popen(
 )
 
 if __name__ == "__main__":
-    print("Abrir o React JS http://localhost:5174")
+    print("Abrir o React JS http://localhost:5173")
     app.run(debug=True, port=5000)

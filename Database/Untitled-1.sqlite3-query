@@ -1,6 +1,0 @@
--- database: ./api.db
-
-SELECT * FROM Albuns
-ORDER BY `id_album` ASC;
-
-UPDATE Albuns SET titulo_album = "Roberto Carlos" WHERE id_album = 1

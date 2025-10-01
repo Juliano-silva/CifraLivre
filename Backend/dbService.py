@@ -2,7 +2,7 @@ import sqlite3
 from Global import GlobalImportes
 
 
-with sqlite3.connect(GlobalImportes.Create_DB_File_TESTE,check_same_thread=False) as connection:
+with sqlite3.connect(GlobalImportes.Path_DB,check_same_thread=False) as connection:
     cursor = connection.cursor()
 
     def Create_All():
