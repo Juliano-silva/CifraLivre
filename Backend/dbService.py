@@ -56,7 +56,7 @@ with sqlite3.connect(GlobalImportes.Path_DB,check_same_thread=False) as connecti
     def InsertItem(DatabaseName,Values):
         placeholders = ",".join("?" * len(Values))
         sql = f"INSERT INTO {DatabaseName} VALUES ({placeholders})"
-        cursor.execute(sql,Values)
+        cursor.execute(sql,list(Values.values()))
         connection.commit()
         
     def UpdateItem(Database,newValue,ColunaWhere,Id):

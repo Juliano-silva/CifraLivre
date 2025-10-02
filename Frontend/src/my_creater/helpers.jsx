@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-
+import MusicProgressBar from '../components/MusicProgressBar.jsx';
 
 export function CardMusic({ Thumb, musicName, Creater, Time, Id }) {
   return (
@@ -40,17 +40,26 @@ export function MusicPlayerOn(props) {
   const [musiChoice, SetmusiChoice] = useState({})
   const [Idmusic, SetIdmusic] = useState(props.Id)
   const [currentTime, setCurrentTime] = useState(0); // 2:22 em segundos
-  const [duration, setDuration] = useState(240); // 4:00 em segundos
+  const [duration, setDuration] = useState(0); // 4:00 em segundos
   const [isPlaying, SetisPlaying] = useState(false)
   const [isRandom, SetisRandom] = useState(false)
   const [isLength, SetisLength] = useState(0)
   const [isRepeat, SetisRepeat] = useState(false)
   const Audio = document.getElementById("Audio")
 
+  const handleSeek = (newTime) => {
+    setCurrentTime(newTime);
+    // Aqui você atualizaria o tempo da sua música
+    Audio.currentTime = newTime;
+  };
+
   useEffect(() => {
     const FunChoice = (Id) => {
       fetch("http://localhost:5000/api/Select").then((response) => response.json().then((dados) => {
         SetisLength(dados.length)
+        setDuration(dados[Id][6])
+        console.log(dados);
+        
         SetmusiChoice({
           "Id": dados[Id][0],
           "Nome": dados[Id][1],
@@ -65,6 +74,13 @@ export function MusicPlayerOn(props) {
 
   // Fazer a Barra de Progresso Funcionar
 
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTime(prev => prev + 1);
+    }, 1000);
+    
+    return () => clearInterval(interval);
+  },[]);
 
   const formatTime = (seconds) => {
     const mins = Math.floor(seconds / 60);
@@ -129,15 +145,12 @@ export function MusicPlayerOn(props) {
 
                 {/* Barra de Progresso */}
                 <div className="mb-8">
-                 <input
-                        type="range"
-                        className="form-range flex-grow-1"
-                        min="0"
-                        max={duration}
-                        value={currentTime}
-                        // onLoadedMetadata={(e) => setDuration(e.target.duration)}
-                        // onTimeUpdate={(e) => setCurrentTime(e.target.currentTime)}
-                      />
+
+                  {/* Aqui vai ficar a barra de Progresso */}
+                  <MusicProgressBar
+                    currentTime={currentTime}
+                    duration={duration}
+                    onSeek={handleSeek} />
                   <audio id="Audio" src={`http://localhost:5000/musicPlay/${musiChoice["MusicFile"]}.mp3`} autoPlay></audio>
                 </div>
 

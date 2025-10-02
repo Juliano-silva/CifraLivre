@@ -37,3 +37,4 @@ subprocess.Popen(
 if __name__ == "__main__":
     print("Abrir o React JS http://localhost:5173")
     app.run(debug=True, port=5000)
+ 

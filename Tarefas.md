@@ -2,7 +2,7 @@
 
 <ol>
 <li><del>Fazer as tarefas</del></li>
-<li>Deixar o Código Global Mais Organizado</li>
+<li><del>Deixar o Código Global Mais Organizado</del></li>
 <li><del>E Criar o CRUD</del></li>
 <li>Documentar Melhor o Código</li>
 <li><del>Adicionar Músicas Novas</del></li>
