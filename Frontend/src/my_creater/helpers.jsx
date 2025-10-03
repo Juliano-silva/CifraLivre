@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import MusicProgressBar from '../components/MusicProgressBar.jsx';
 
-export function CardMusic({ Thumb, musicName, Creater, Time, Id }) {
+export function CardMusic({Thumb, musicName, Creater, Duration}) {
   return (
     <div id="Card_Music">
       <div className="card bg-secondary border-0 music-card">
@@ -10,7 +10,7 @@ export function CardMusic({ Thumb, musicName, Creater, Time, Id }) {
           <h6 className="card-title mb-1">{Creater}</h6>
           <p className="card-text text-muted small">{musicName}</p>
           <div className="d-flex justify-content-between align-items-center">
-            <small className="text-muted">{Time}</small>
+            <small className="text-muted">{Duration}</small>
             <div>
               <button className="btn btn-sm btn-outline-light me-1">
                 <i className="fas fa-heart"></i>
@@ -39,8 +39,8 @@ export function SidebarItens({ Link, classNameIcon, IcoName }) {
 export function MusicPlayerOn(props) {
   const [musiChoice, SetmusiChoice] = useState({})
   const [Idmusic, SetIdmusic] = useState(props.Id)
-  const [currentTime, setCurrentTime] = useState(0); // 2:22 em segundos
-  const [duration, setDuration] = useState(0); // 4:00 em segundos
+  const [currentTime, setCurrentTime] = useState(0);
+  const [duration, setDuration] = useState(0);
   const [isPlaying, SetisPlaying] = useState(false)
   const [isRandom, SetisRandom] = useState(false)
   const [isLength, SetisLength] = useState(0)
@@ -54,22 +54,24 @@ export function MusicPlayerOn(props) {
   };
 
   useEffect(() => {
+    
     const FunChoice = (Id) => {
       fetch("http://localhost:5000/api/Select").then((response) => response.json().then((dados) => {
-        SetisLength(dados.length)
-        setDuration(dados[Id][6])
-        console.log(dados);
+
+        let Idnew = dados.findIndex(item => item[0] === Id)        
         
+        SetisLength(dados.length)
+        setDuration(dados[Idnew][6])        
         SetmusiChoice({
-          "Id": dados[Id][0],
-          "Nome": dados[Id][1],
-          "Thumb": dados[Id][4],
-          "Data": dados[Id][3],
-          "MusicFile": String(dados[Id][1]).replace(/[\\\/\:\*\?\"\<\>\|]/gi, '') // Retira caracteres inválidos do nome do arquivo
+          "Id": dados[Idnew][0],
+          "Nome": dados[Idnew][1],
+          "Thumb": dados[Idnew][4],
+          "Data": dados[Idnew][3],
+          "MusicFile": String(dados[Idnew][1]).replace(/[\\\/\:\*\?\"\<\>\|]/gi, '') // Retira caracteres inválidos do nome do arquivo
         })
       }))
     }
-    FunChoice(Idmusic)
+    FunChoice(Idmusic)    
   }, [Idmusic])
 
   // Fazer a Barra de Progresso Funcionar
@@ -155,7 +157,7 @@ export function MusicPlayerOn(props) {
                 </div>
 
                 {/* Controles Principais */}
-                <div className="d-flex justify-content-center align-items-center mb-4">
+                <div className="d-flex justify-content-center align-items-center mb-4" id="ControlesPlayer">
 
                   {/* Botão Random */}
                   <button
@@ -177,9 +179,9 @@ export function MusicPlayerOn(props) {
 
                   {/* Botão Play/Pause */}
                   <button
-                    className={`btn btn-primary btn-lg rounded-circle me-3 ${isPlaying ? 'playing' : ''}`}
+                    className={`btn btn-primary btn-lg rounded-circle me-3`}
                     onClick={togglePlay}
-                    style={{ width: '80px', height: '80px' }}
+                    style={{ width: '8vh', height: '8vh' }}
                     title={isPlaying ? 'Pausar' : 'Reproduzir'}
                   >
                     <i className={`fas ${isPlaying ? 'fa-play' : 'fa-pause'} fa-2x`}></i>

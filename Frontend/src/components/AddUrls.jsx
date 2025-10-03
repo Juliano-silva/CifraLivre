@@ -1,6 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 
 const AddUrls = () => {
+  const [generos, setGeneros] = useState([]);
   const [formData, setFormData] = useState({
     musicUrl: ''
   });
@@ -12,6 +13,15 @@ const AddUrls = () => {
       [name]: value
     }));
   };
+
+  useEffect(() => {
+    var genre = document.getElementById("genre");
+    fetch("http://localhost:5000/api/SelectGenero")
+    .then((res) => res.json())
+    .then((dados) => {
+      setGeneros(dados)
+    })
+  },[])
 
   const handleSubmit = async (e) => {
     e.preventDefault();
@@ -124,17 +134,9 @@ const AddUrls = () => {
                       value={formData.genre}
                       onChange={handleInputChange}
                     >
-                      <option value="">Selecione um gênero</option>
-                      <option value="rock">Rock</option>
-                      <option value="pop">Pop</option>
-                      <option value="jazz">Jazz</option>
-                      <option value="classical">Clássica</option>
-                      <option value="electronic">Eletrônica</option>
-                      <option value="hip-hop">Hip-Hop</option>
-                      <option value="country">Country</option>
-                      <option value="reggae">Reggae</option>
-                      <option value="blues">Blues</option>
-                      <option value="other">Outro</option>
+                      {generos.map((genero) => (
+                        <option key={genero[0]} value={genero[0]}>{genero[1]}</option>
+                      ))}
                     </select>
                   </div>
                 </div>

@@ -378,6 +378,7 @@ h4,h5{
   display: flex;
   overflow: auto;
   cursor: pointer;
+  width: 100%;  
 }
 
 #Musicard > div {
@@ -386,7 +387,7 @@ h4,h5{
 }
 
 #Card_Music {
-  width: 50vh;
+  width: 40vh;
   font-size: 2vh;
 }
 
@@ -794,3 +795,20 @@ h3, h5 {
     transform: translateY(-50%) scale(1.1);
   }
 }
+
+/* ControlesPlayer */
+#ControlesPlayer{
+  width: 100%;
+  height: 20vh;
+  bottom: 0;
+  left: 0;
+  z-index: 1050;
+  backdrop-filter: blur(20px);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+option{
+  color: #FFF;
+  background-color: #000;
+}
+

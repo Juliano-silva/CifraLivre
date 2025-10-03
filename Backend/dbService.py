@@ -80,6 +80,11 @@ with sqlite3.connect(GlobalImportes.Path_DB,check_same_thread=False) as connecti
             DROP TABLE Musicas_Generos;
             DROP TABLE Generos;
         """)
+    
+    def Clear_Table(database):
+        cursor.execute(f"DELETE FROM {database}")
+        connection.commit()
+        
 
 # print(SelectItem("Musicas"))
 # RemoverItem("Albuns","id_album",2)

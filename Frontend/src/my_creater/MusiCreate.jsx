@@ -24,20 +24,20 @@ export default function MusiCreate() {
     }
 
     return (
-        <div>
+        <div id="MusiCreate" className="d-flex flex-column align-items-center">
             <div id="Musicard" onClick={() => setShowPlayer(!showPlayer)}>
                 {music.map((music, index) =>
                     <div key={index} onClick={() => SelectMusic(music)}>
-                        <CardMusic Id={index}
+                        <CardMusic Id={music[0]}
                             Thumb={music[4]}
                             musicName={music[1]}
                             Creater={music[0]}
-                            Time={music[6]} />
+                            Duration={music[6]} />
                     </div>
                 )}
             </div>
             <div>{showPlayer && selectedMusic && (
-                <MusicPlayerOn Id={parseInt(selectedMusic[0]) - 1}/>
+                <MusicPlayerOn Id={parseInt(selectedMusic[0])}/>
             )}
             </div>
         </div>

@@ -28,6 +28,24 @@ const Settings = () => {
     setActiveSection(section);
   };
 
+  const limparCache = () => {
+    console.log("Cache limpo!");
+    fetch("http://localhost:5000/api/ClearCache", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ table: "Musicas" })
+    })
+      .then(response => response.json()) // se sua API retornar JSON
+      .then(data => {
+        console.log("Resposta da API:", data);
+      })
+      .catch(error => {
+        console.error("Erro:", error);
+      });
+  }
+
   return (
     <div className="container py-5">
       <div className="row">
@@ -40,37 +58,37 @@ const Settings = () => {
               </h5>
             </div>
             <div className="list-group list-group-flush">
-              <button 
+              <button
                 className={`list-group-item list-group-item-action bg-transparent text-light border-secondary ${activeSection === 'general' ? 'active' : ''}`}
                 onClick={() => handleSectionClick('general')}
               >
                 <i className="fas fa-sliders-h me-2"></i>Geral
               </button>
-              <button 
+              <button
                 className={`list-group-item list-group-item-action bg-transparent text-light border-secondary ${activeSection === 'audio' ? 'active' : ''}`}
                 onClick={() => handleSectionClick('audio')}
               >
                 <i className="fas fa-volume-up me-2"></i>Áudio
               </button>
-              <button 
+              <button
                 className={`list-group-item list-group-item-action bg-transparent text-light border-secondary ${activeSection === 'appearance' ? 'active' : ''}`}
                 onClick={() => handleSectionClick('appearance')}
               >
                 <i className="fas fa-palette me-2"></i>Aparência
               </button>
-              <button 
+              <button
                 className={`list-group-item list-group-item-action bg-transparent text-light border-secondary ${activeSection === 'library' ? 'active' : ''}`}
                 onClick={() => handleSectionClick('library')}
               >
                 <i className="fas fa-database me-2"></i>Biblioteca
               </button>
-              <button 
+              <button
                 className={`list-group-item list-group-item-action bg-transparent text-light border-secondary ${activeSection === 'privacy' ? 'active' : ''}`}
                 onClick={() => handleSectionClick('privacy')}
               >
                 <i className="fas fa-shield-alt me-2"></i>Privacidade
               </button>
-              <button 
+              <button
                 className={`list-group-item list-group-item-action bg-transparent text-light border-secondary ${activeSection === 'about' ? 'active' : ''}`}
                 onClick={() => handleSectionClick('about')}
               >
@@ -95,8 +113,8 @@ const Settings = () => {
                   <div className="row">
                     <div className="col-md-6 mb-3">
                       <label htmlFor="language" className="form-label">Idioma</label>
-                      <select 
-                        className="form-select bg-dark border-secondary text-light" 
+                      <select
+                        className="form-select bg-dark border-secondary text-light"
                         id="language"
                         value={settings.language}
                         onChange={(e) => handleSettingChange('language', e.target.value)}
@@ -110,9 +128,9 @@ const Settings = () => {
                     <div className="col-md-6 mb-3">
                       <label htmlFor="autoplay" className="form-label">Reprodução Automática</label>
                       <div className="form-check form-switch">
-                        <input 
-                          className="form-check-input" 
-                          type="checkbox" 
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
                           id="autoplay"
                           checked={settings.autoplay}
                           onChange={(e) => handleSettingChange('autoplay', e.target.checked)}
@@ -127,9 +145,9 @@ const Settings = () => {
                     <div className="col-md-6 mb-3">
                       <label htmlFor="notifications" className="form-label">Notificações</label>
                       <div className="form-check form-switch">
-                        <input 
-                          className="form-check-input" 
-                          type="checkbox" 
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
                           id="notifications"
                           checked={settings.notifications}
                           onChange={(e) => handleSettingChange('notifications', e.target.checked)}
@@ -142,9 +160,9 @@ const Settings = () => {
                     <div className="col-md-6 mb-3">
                       <label htmlFor="startup" className="form-label">Inicialização</label>
                       <div className="form-check form-switch">
-                        <input 
-                          className="form-check-input" 
-                          type="checkbox" 
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
                           id="startup"
                           checked={settings.startup}
                           onChange={(e) => handleSettingChange('startup', e.target.checked)}
@@ -173,11 +191,11 @@ const Settings = () => {
                   <div className="row">
                     <div className="col-md-6 mb-3">
                       <label htmlFor="volume" className="form-label">Volume Padrão</label>
-                      <input 
-                        type="range" 
-                        className="form-range" 
+                      <input
+                        type="range"
+                        className="form-range"
                         id="volume"
-                        min="0" 
+                        min="0"
                         max="100"
                         value={settings.volume}
                         onChange={(e) => handleSettingChange('volume', parseInt(e.target.value))}
@@ -190,8 +208,8 @@ const Settings = () => {
                     </div>
                     <div className="col-md-6 mb-3">
                       <label htmlFor="quality" className="form-label">Qualidade de Áudio</label>
-                      <select 
-                        className="form-select bg-dark border-secondary text-light" 
+                      <select
+                        className="form-select bg-dark border-secondary text-light"
                         id="quality"
                         value={settings.quality}
                         onChange={(e) => handleSettingChange('quality', e.target.value)}
@@ -207,9 +225,9 @@ const Settings = () => {
                     <div className="col-md-6 mb-3">
                       <label htmlFor="crossfade" className="form-label">Crossfade</label>
                       <div className="form-check form-switch">
-                        <input 
-                          className="form-check-input" 
-                          type="checkbox" 
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
                           id="crossfade"
                           checked={settings.crossfade}
                           onChange={(e) => handleSettingChange('crossfade', e.target.checked)}
@@ -222,9 +240,9 @@ const Settings = () => {
                     <div className="col-md-6 mb-3">
                       <label htmlFor="equalizer" className="form-label">Equalizador</label>
                       <div className="form-check form-switch">
-                        <input 
-                          className="form-check-input" 
-                          type="checkbox" 
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
                           id="equalizer"
                           checked={settings.equalizer}
                           onChange={(e) => handleSettingChange('equalizer', e.target.checked)}
@@ -253,8 +271,8 @@ const Settings = () => {
                   <div className="row">
                     <div className="col-md-6 mb-3">
                       <label htmlFor="theme" className="form-label">Tema</label>
-                      <select 
-                        className="form-select bg-dark border-secondary text-light" 
+                      <select
+                        className="form-select bg-dark border-secondary text-light"
                         id="theme"
                         value={settings.theme}
                         onChange={(e) => handleSettingChange('theme', e.target.value)}
@@ -266,8 +284,8 @@ const Settings = () => {
                     </div>
                     <div className="col-md-6 mb-3">
                       <label htmlFor="accentColor" className="form-label">Cor de Destaque</label>
-                      <select 
-                        className="form-select bg-dark border-secondary text-light" 
+                      <select
+                        className="form-select bg-dark border-secondary text-light"
                         id="accentColor"
                         value={settings.accentColor}
                         onChange={(e) => handleSettingChange('accentColor', e.target.value)}
@@ -284,9 +302,9 @@ const Settings = () => {
                     <div className="col-md-6 mb-3">
                       <label htmlFor="animations" className="form-label">Animações</label>
                       <div className="form-check form-switch">
-                        <input 
-                          className="form-check-input" 
-                          type="checkbox" 
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
                           id="animations"
                           checked={settings.animations}
                           onChange={(e) => handleSettingChange('animations', e.target.checked)}
@@ -299,9 +317,9 @@ const Settings = () => {
                     <div className="col-md-6 mb-3">
                       <label htmlFor="compactMode" className="form-label">Modo Compacto</label>
                       <div className="form-check form-switch">
-                        <input 
-                          className="form-check-input" 
-                          type="checkbox" 
+                        <input
+                          className="form-check-input"
+                          type="checkbox"
                           id="compactMode"
                           checked={settings.compactMode}
                           onChange={(e) => handleSettingChange('compactMode', e.target.checked)}
@@ -363,7 +381,7 @@ const Settings = () => {
                     <button className="btn btn-outline-warning">
                       <i className="fas fa-download me-1"></i>Exportar Dados
                     </button>
-                    <button className="btn btn-outline-danger">
+                    <button className="btn btn-outline-danger" onClick={limparCache}>
                       <i className="fas fa-trash me-1"></i>Limpar Cache
                     </button>
                   </div>

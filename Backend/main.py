@@ -3,7 +3,7 @@ from flask_cors import CORS
 import os,subprocess
 from Global import GlobalImportes
 from youtubeDownloader import DownloadMusic
-from dbService import DROP_ALL,Create_All,SelectItem
+from dbService import DROP_ALL,Create_All,SelectItem,Clear_Table
 
 
 app = Flask(__name__)
@@ -17,12 +17,22 @@ def Select():
 @app.route("/musicPlay/<path:filename>")
 def musicFolder(filename):
     return send_from_directory(os.path.join(GlobalImportes.Path_Download),filename)
+
+@app.route("/api/SelectGenero",methods=["GET"])
+def SelectGenero():
+    return jsonify(SelectItem("Generos"))
  
 @app.route("/api/Download",methods=["GET","POST"])
 def Download():
     dados = request.get_json()
     DownloadMusic(str(dados["url"]))
     return jsonify({"message": f"Recebi a URL: {dados['url']}"}), 200
+
+@app.route("/api/ClearCache",methods=["POST"])
+def ClearCache():
+    dados = request.get_json()
+    Clear_Table(dados["table"])
+    return jsonify({"message": f"Tabela {dados['table']} limpa com sucesso!"}), 200
 
 # Abrir o React Js e Flask Juntos 
 
