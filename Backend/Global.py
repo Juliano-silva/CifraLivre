@@ -9,6 +9,7 @@ class GlobalImportes():
     Path = os.path.join(BASE_PARENT,"CifraLivre_Folders")
     Path_Download = os.path.join(Path,"Download")
     Path_DB = os.path.join(Path,"database.db")
+    Path_Frontend = os.path.join(BASE_PARENT,"Frontend")
     
     # Criar as Pastas
     

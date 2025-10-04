@@ -38,6 +38,7 @@ def ClearCache():
 
 subprocess.Popen(
     "npm run dev",
+    cwd=GlobalImportes.Path_Frontend, # Caminho do React JS
     shell=True,
     stdout=subprocess.DEVNULL, # Vai Ignorar a Saída
     stderr=subprocess.DEVNULL, # Vai Ignorar os erros
