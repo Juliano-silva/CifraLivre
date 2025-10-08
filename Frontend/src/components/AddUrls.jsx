@@ -1,6 +1,8 @@
 import React, { useEffect, useState } from 'react';
+import { Porta } from './Global';
 
 const AddUrls = () => {
+  const port = Porta(); 
   const [generos, setGeneros] = useState([]);
   const [formData, setFormData] = useState({
     musicUrl: ''
@@ -16,7 +18,7 @@ const AddUrls = () => {
 
   useEffect(() => {
     var genre = document.getElementById("genre");
-    fetch("http://localhost:5000/api/SelectGenero")
+    fetch(`http://localhost:${port}/api/SelectGenero`)
     .then((res) => res.json())
     .then((dados) => {
       setGeneros(dados)
@@ -25,7 +27,7 @@ const AddUrls = () => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const resposta = await fetch("http://localhost:5000/api/Download", {
+    const resposta = await fetch(`http://localhost:${port}/api/Download`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ url: formData.musicUrl }),

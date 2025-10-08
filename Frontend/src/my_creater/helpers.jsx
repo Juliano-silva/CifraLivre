@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import MusicProgressBar from '../components/MusicProgressBar.jsx';
+import { Porta } from "../components/Global.jsx";
 
 export function CardMusic({Thumb, musicName, Creater, Duration}) {
   return (
@@ -47,6 +48,8 @@ export function MusicPlayerOn(props) {
   const [isRepeat, SetisRepeat] = useState(false)
   const Audio = document.getElementById("Audio")
 
+  const port = Porta();
+
   const handleSeek = (newTime) => {
     setCurrentTime(newTime);
     // Aqui você atualizaria o tempo da sua música
@@ -56,7 +59,7 @@ export function MusicPlayerOn(props) {
   useEffect(() => {
     
     const FunChoice = (Id) => {
-      fetch("http://localhost:5000/api/Select").then((response) => response.json().then((dados) => {
+      fetch(`http://localhost:${port}/api/Select`).then((response) => response.json().then((dados) => {
 
         let Idnew = dados.findIndex(item => item[0] === Id)        
         
@@ -117,7 +120,27 @@ export function MusicPlayerOn(props) {
   const handleVolumeChange = (e) => { };
 
   return (
-    <div id="Body_Player" className="bg-dark text-light min-vh-100 d-flex align-items-center justify-content-center">
+    <div id="Body_Player"
+      style={{
+    backgroundImage: `url(${musiChoice["Thumb"]})`,
+    backgroundSize: 'cover',
+    backgroundPosition: 'center',
+    position: 'fixed',
+    top: 0,
+    left: 0,
+    width: '100%',
+    height: '100%',
+  }}
+  className="text-light min-vh-100 d-flex align-items-center justify-content-center">
+    <div
+    style={{
+      backgroundColor: 'rgba(0, 0, 0, 0.3)', // leve escurecimento
+      position: 'absolute',
+      top: 0,
+      left: 0,
+      width: '100%',
+      height: '100%',
+    }}></div>
       <div className="container">
         <div className="row justify-content-center">
           <div >
@@ -153,7 +176,7 @@ export function MusicPlayerOn(props) {
                     currentTime={currentTime}
                     duration={duration}
                     onSeek={handleSeek} />
-                  <audio id="Audio" src={`http://localhost:5000/musicPlay/${musiChoice["MusicFile"]}.mp3`} autoPlay></audio>
+                  <audio id="Audio" src={`http://localhost:${port}/musicPlay/${musiChoice["MusicFile"]}.mp3`} autoPlay></audio>
                 </div>
 
                 {/* Controles Principais */}

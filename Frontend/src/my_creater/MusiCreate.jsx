@@ -1,13 +1,17 @@
 import React, { useState, useEffect } from "react"
 import { CardMusic, MusicPlayerOn } from "./helpers";
+import {Porta} from "../components/Global";
+
 
 export default function MusiCreate() {
     const [music, SetMusic] = useState([])
     const [selectedMusic, setSelectedMusic] = useState(null)
     const [showPlayer, setShowPlayer] = useState(false)
+    
+    const port = Porta();        
 
     useEffect(() => {
-        fetch("http://localhost:5000/api/Select")
+        fetch(`http://localhost:${port}/api/Select`)
             .then((res) => {
                 if (!res.ok) {
                     throw new Error("Erro ao buscar dados");

@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
+import { Porta } from './Global';
 
 const Settings = () => {
   const [activeSection, setActiveSection] = useState('general');
+  const port = Porta(); 
   const [settings, setSettings] = useState({
     language: 'pt-BR',
     autoplay: true,
@@ -29,8 +31,8 @@ const Settings = () => {
   };
 
   const limparCache = () => {
-    console.log("Cache limpo!");
-    fetch("http://localhost:5000/api/ClearCache", {
+    console.log("Cache limpo!");    
+    fetch(`http://localhost:${port}/api/ClearCache`, {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

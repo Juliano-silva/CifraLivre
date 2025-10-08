@@ -11,6 +11,9 @@ class GlobalImportes():
     Path_DB = os.path.join(Path,"database.db")
     Path_Frontend = os.path.join(BASE_PARENT,"Frontend")
     
+    # Port
+    Port_Flask = 5120
+    
     # Criar as Pastas
     
     if not os.path.exists(Path):

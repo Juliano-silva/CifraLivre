@@ -10,6 +10,7 @@ app = Flask(__name__)
 CORS(app)  # Permite que o React acesse o Flask
 
 # Comandos
+
 @app.route("/api/Select",methods=["GET"])
 def Select():
     return jsonify(SelectItem("Musicas"))
@@ -47,5 +48,5 @@ subprocess.Popen(
 
 if __name__ == "__main__":
     print("Abrir o React JS http://localhost:5173")
-    app.run(debug=True, port=5000)
+    app.run(debug=True, port=GlobalImportes.Port_Flask)
  
