@@ -1,9 +1,11 @@
-import sqlite3
+import sqlite3,os,re
 from Global import GlobalImportes
 
 
 with sqlite3.connect(GlobalImportes.Path_DB,check_same_thread=False) as connection:
     cursor = connection.cursor()
+    
+    GlobalImportes.FormatoUTF()
 
     def Create_All():
         cursor.executescript(""" 
@@ -84,6 +86,37 @@ with sqlite3.connect(GlobalImportes.Path_DB,check_same_thread=False) as connecti
     def Clear_Table(database):
         cursor.execute(f"DELETE FROM {database}")
         connection.commit()
+        
+    def Folder_Remove():
+        try:
+            folder_files_cleaned = set()
+            
+            if os.path.exists(GlobalImportes.Path_Download):
+                for file_name in os.listdir(GlobalImportes.Path_Download):
+                    if file_name.lower().endswith(".mp3") and os.path.isfile(os.path.join(GlobalImportes.Path_Download, file_name)):
+                        # Limpa o nome do arquivo para comparação com o título do banco de dados
+                        cleaned_name = re.sub(r'[\\/*?:"<>|]','', file_name.replace(".mp3", ""))
+                        folder_files_cleaned.add(cleaned_name)
+
+            # Obtém todos os títulos de música do banco de dados
+            cursor.execute("SELECT title FROM Musicas")
+            db_titles = {row[0] for row in cursor.fetchall()}
+
+            # Identifica os títulos no banco de dados que não têm um arquivo correspondente
+            titles_to_remove = db_titles - folder_files_cleaned
+
+            removed_count = 0
+            for title in titles_to_remove:
+                cursor.execute("DELETE FROM Musicas WHERE title = ?", (title,))
+                print(f"Registro removido do banco de dados: {title}")
+                removed_count += 1
+
+            connection.commit()
+            return f"Processo concluído. {removed_count} registros removidos do banco de dados."
+
+        except Exception as e:
+            return f"Ocorreu um erro: {e}"
+    
         
 
 # print(SelectItem("Musicas"))

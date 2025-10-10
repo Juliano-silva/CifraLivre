@@ -3,13 +3,17 @@ from flask_cors import CORS
 import os,subprocess
 from Global import GlobalImportes
 from youtubeDownloader import DownloadMusic
-from dbService import DROP_ALL,Create_All,SelectItem,Clear_Table
+from dbService import DROP_ALL,Create_All,SelectItem,Clear_Table,Folder_Remove
 
 
 app = Flask(__name__)
 CORS(app)  # Permite que o React acesse o Flask
 
 # Comandos
+
+Folder_Remove()
+
+GlobalImportes.FormatoUTF()
 
 @app.route("/api/Select",methods=["GET"])
 def Select():
@@ -36,6 +40,8 @@ def ClearCache():
     return jsonify({"message": f"Tabela {dados['table']} limpa com sucesso!"}), 200
 
 # Abrir o React Js e Flask Juntos 
+
+GlobalImportes.FormatoUTF()
 
 subprocess.Popen(
     "npm run dev",

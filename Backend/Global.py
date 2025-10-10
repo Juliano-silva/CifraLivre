@@ -23,4 +23,8 @@ class GlobalImportes():
         
 
     def FormatoUTF():
-        sys.stdout = io.TextIOWrapper(sys.stdout.buffer, encoding="utf-8") # Assim, qualquer print() vai usar UTF-8.
+        try:
+            sys.stdout.reconfigure(encoding='utf-8')
+        except Exception as e:
+            # Evita quebrar se não houver stdout real
+            print(f"[Aviso] Não foi possível reconfigurar stdout: {e}")
