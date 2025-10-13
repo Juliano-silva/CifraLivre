@@ -1,4 +1,4 @@
-import os,subprocess,sys,io
+import os,subprocess,sys,io,re
 
 
 class GlobalImportes():
@@ -28,3 +28,12 @@ class GlobalImportes():
         except Exception as e:
             # Evita quebrar se não houver stdout real
             print(f"[Aviso] Não foi possível reconfigurar stdout: {e}")
+            
+    def PathListidr(Path):
+        if os.path.exists(Path):
+            return os.listdir(Path)
+        
+    def PadraoLetter(file_name):
+        # Limpa o nome do arquivo para comparação com o título do banco de dados
+        return re.sub(r'[\\/*?:"<>|]','', file_name.replace(".mp3", ""))
+

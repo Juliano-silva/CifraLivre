@@ -3,7 +3,7 @@ from flask_cors import CORS
 import os,subprocess
 from Global import GlobalImportes
 from youtubeDownloader import DownloadMusic
-from dbService import DROP_ALL,Create_All,SelectItem,Clear_Table,Folder_Remove
+from dbService import DROP_ALL,Create_All,SelectItem,Clear_Table,Folder_Remove,Folder_Add
 
 
 app = Flask(__name__)
@@ -12,6 +12,8 @@ CORS(app)  # Permite que o React acesse o Flask
 # Comandos
 
 Folder_Remove()
+Folder_Add()
+
 
 GlobalImportes.FormatoUTF()
 

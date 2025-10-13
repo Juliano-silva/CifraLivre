@@ -1,5 +1,6 @@
 import sqlite3,os,re
 from Global import GlobalImportes
+from datetime import datetime
 
 
 with sqlite3.connect(GlobalImportes.Path_DB,check_same_thread=False) as connection:
@@ -87,38 +88,65 @@ with sqlite3.connect(GlobalImportes.Path_DB,check_same_thread=False) as connecti
         cursor.execute(f"DELETE FROM {database}")
         connection.commit()
         
+        
+    # Vai remover caso ele não esteja na pasta 
     def Folder_Remove():
-        try:
-            folder_files_cleaned = set()
-            
-            if os.path.exists(GlobalImportes.Path_Download):
-                for file_name in os.listdir(GlobalImportes.Path_Download):
+            try:
+                folder_files_cleaned = set()     
+                for file_name in GlobalImportes.PathListidr(GlobalImportes.Path_Download):
                     if file_name.lower().endswith(".mp3") and os.path.isfile(os.path.join(GlobalImportes.Path_Download, file_name)):
-                        # Limpa o nome do arquivo para comparação com o título do banco de dados
-                        cleaned_name = re.sub(r'[\\/*?:"<>|]','', file_name.replace(".mp3", ""))
-                        folder_files_cleaned.add(cleaned_name)
+                        folder_files_cleaned.add(GlobalImportes.PadraoLetter(file_name))
+                # Obtém todos os títulos de música do banco de dados
+                cursor.execute("SELECT title FROM Musicas")
+                db_titles = {row[0] for row in cursor.fetchall()}
 
-            # Obtém todos os títulos de música do banco de dados
+                # Identifica os títulos no banco de dados que não têm um arquivo correspondente
+                titles_to_remove = db_titles - folder_files_cleaned
+
+                removed_count = 0
+                for title in titles_to_remove:
+                    cursor.execute("DELETE FROM Musicas WHERE title = ?", (title,))
+                    print(f"Registro removido do banco de dados: {title}")
+                    removed_count += 1
+
+                connection.commit()
+                return f"Processo concluído. {removed_count} registros removidos do banco de dados."
+
+            except Exception as e:
+                return f"Ocorreu um erro: {e}"
+    
+    
+    def Folder_Add():
+        try:
+            Path_Cleaned = set()
+            for file in GlobalImportes.PathListidr(GlobalImportes.Path_Download):
+                if file.lower().endswith(".mp3") and os.path.isfile(os.path.join(GlobalImportes.Path_Download, file)):
+                    Path_Cleaned.add(GlobalImportes.PadraoLetter(file))
+                     
             cursor.execute("SELECT title FROM Musicas")
             db_titles = {row[0] for row in cursor.fetchall()}
+            
+            NotDB = Path_Cleaned - db_titles
+            
+            for name in NotDB:
+                    InsertItem("Musicas",{
+                    "ID":None, # Auto Increment
+                    "Titulo":f"{name}",
+                    "Url":"None",
+                    "data_lancamento":f"{datetime.fromtimestamp(os.path.getmtime(rf"{GlobalImportes.Path_Download}\{name}.mp3"))}",
+                    "Thumb":"https://i.pinimg.com/1200x/e0/8d/0f/e08d0f1a3981e5a7d4287524a75c0d1a.jpg",
+                    "LetraMusic":None, #Letra da Musica
+                    "Duration":f"250",
+                    "File":None,
+                    "Formation":".MP3"
+                    })
+            
+            return "Música Adicionado com Sucesso"
 
-            # Identifica os títulos no banco de dados que não têm um arquivo correspondente
-            titles_to_remove = db_titles - folder_files_cleaned
-
-            removed_count = 0
-            for title in titles_to_remove:
-                cursor.execute("DELETE FROM Musicas WHERE title = ?", (title,))
-                print(f"Registro removido do banco de dados: {title}")
-                removed_count += 1
-
-            connection.commit()
-            return f"Processo concluído. {removed_count} registros removidos do banco de dados."
-
+            
         except Exception as e:
             return f"Ocorreu um erro: {e}"
-    
         
-
 # print(SelectItem("Musicas"))
 # RemoverItem("Albuns","id_album",2)
 # InsertItem("Albuns",(None,"Titulo 3","01-07-2024","https:"))
